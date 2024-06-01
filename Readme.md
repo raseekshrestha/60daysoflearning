@@ -2,4 +2,4 @@
 
 learning backend with nodejs
 
-[Day 1:](https://choosealicense.com/licenses/mit/) nodejs and npm installation and tried REPL
+[Day 1:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day1) nodejs and npm installation and tried REPL
