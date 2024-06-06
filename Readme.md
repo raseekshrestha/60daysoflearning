@@ -11,3 +11,5 @@ learning backend with nodejs
 [Day 4:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day4) Architecture of NodeJS
 
 [Day 5:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day5) Basic Server using http 
+
+[Day 6:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day6) Created server using express and tried jwt and cors 
