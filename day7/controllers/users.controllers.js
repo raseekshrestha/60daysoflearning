@@ -15,9 +15,27 @@ const createUser = asyncHandler(async (req, res) => {
     })
 
     res.json(new ApiResponse(201, "User Registered Successfully"))
-
-
 })
+
+const changePassword = asyncHandler(async (req, res) => {
+    const { oldPassword, newPassword } = req.body
+    if (!oldPassword || !newPassword) {
+        throw new ApiError(400, "oldPassword and newPassword Required");
+    }
+    if (oldPassword == newPassword) {
+        throw new ApiError(400, "old and new password cannot be same");
+    }
+
+    const user = await userModel.findOne({ _id: req.user._id })
+    if (await user.matchPassword(oldPassword)) {
+        user.password = newPassword
+        user.save()
+        return res.json(new ApiResponse(200, "Password Changed!"))
+    } else {
+        throw new ApiError(401, "old password invalid");
+    }
+})
+
 
 
 
@@ -36,4 +54,4 @@ const loginUser = asyncHandler(async (req, res) => {
 
 
 
-export { createUser, loginUser }
+export { createUser, loginUser, changePassword }

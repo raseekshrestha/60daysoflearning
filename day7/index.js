@@ -14,6 +14,12 @@ app.use(cors());
 
 app.use("/api/users", userRoutes);
 
+app.use((req, res, next) => {
+    const error = new Error(`404 not found: ${req.originalUrl}`)
+    error.statusCode = 404;
+    next(error);
+})
+
 app.use((err, req, res, next) => {
     res.status(err.statusCode || 500)
     res.json({

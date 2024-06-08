@@ -13,3 +13,9 @@ learning backend with nodejs
 [Day 5:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day5) Basic Server using http 
 
 [Day 6:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day6) Created server using express and tried jwt and cors 
+
+[Day 7-8:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day7) 
+
+    -learned express with mongoose to register and login user .
+
+    - Added middlewares to check for token and required fields
