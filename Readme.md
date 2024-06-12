@@ -19,3 +19,13 @@ learning backend with nodejs
     -learned express with mongoose to register and login user .
 
     - Added middlewares to check for token and required fields
+
+[Day 9:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day9) Learned about postman and its functions
+
+[Day 10:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day10) Basics of Mongodb aggregation pipelines
+
+[Day 11:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day11) match, count, some and basic grouping in mongodb aggregation pipelines
+
+[Day 12:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day12) Completed aggregation pipleline tutorial
+
+
