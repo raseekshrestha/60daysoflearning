@@ -28,4 +28,9 @@ learning backend with nodejs
 
 [Day 12:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day12) Completed aggregation pipleline tutorial
 
+[Day 13:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day13) learned about websockets and keep track of active client
+
+[Day 14:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day14) created screen / video feed recording service
+
+
 

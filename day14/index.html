@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Live</title>
+</head>
+<body>
+    <div class="frame">
+        <video id="user-video" autoplay height="400px" width="auto" style="border: 2px solid red;"></video>
+        <button id="start">Start</button>
+
+        <button id="stop">Stop</button>
+        <div>
+            <h3>stream status:</h3>
+            <h4 id="status"></h4>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"></script>
+    <script>
+        const state = {media:null}
+        const socket = io()
+
+        const userVideo = document.getElementById("user-video")
+        window.addEventListener("load",async (e)=>{
+            state.media = await navigator.mediaDevices.getDisplayMedia({audio:true,video:true})
+            userVideo.srcObject = state.media;
+        })
+
+        const startBtn = document.getElementById("start")
+        let mediaRecorder=null;
+        startBtn.addEventListener("click",()=>{
+            socket.emit("streamStart")
+            document.getElementById("status").innerHTML = "Streaming..."
+            mediaRecorder = new MediaRecorder(state.media,{
+                audioBitsPerSecond:128000,
+                videoBitsPerSecond:500000,
+                framerate:30
+            })
+            mediaRecorder.ondataavailable = (event)=>{
+                // console.log("stream data: ",event.data)
+                socket.emit('stream',event.data)
+            }
+
+            mediaRecorder.start(30)
+        })
+
+        document.getElementById("stop").addEventListener("click",()=>{
+            socket.emit("streamEnd")
+            document.getElementById("status").innerHTML = "Stopped Streaming..."
+
+            if (mediaRecorder){
+                mediaRecorder.stop()
+                mediaRecorder = null;
+            }
+        })
+    </script>
+</body>
+</html>
