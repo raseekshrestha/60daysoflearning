@@ -34,6 +34,10 @@ learning backend with nodejs
 
 [Day 15:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day15) create a cli tool to create, and receive temporary mail
 
+[Day 16:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day16) learned about streams in nodejs
+
+
+
 
 
 
