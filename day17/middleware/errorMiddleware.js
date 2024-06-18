@@ -7,7 +7,7 @@ const notFound = (req, res, next) => {
 
 const errorHandler = (err, req, res, next) => {
     // res.send("handling error")
-    console.log(err)
+    // console.log(err)
     const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
     res.status(statusCode)
     res.json({
@@ -16,4 +16,4 @@ const errorHandler = (err, req, res, next) => {
     })
 }
 
-module.exports = { notFound, errorHandler }
+export { notFound, errorHandler }

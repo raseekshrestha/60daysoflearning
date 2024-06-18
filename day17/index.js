@@ -1,11 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const connectDB = require("./config/db")
-const { notFound, errorHandler } = require("./middleware/errorMiddleware")
 
-const userRoutes = require("./routes/user.routes")
+import express from 'express';
+import cors from 'cors';
+import { connectDB } from './config/db.js';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import { config, configDotenv } from 'dotenv';
+
+import userRoutes from './routes/user.routes.js';
 
 
+configDotenv()
 
 
 
