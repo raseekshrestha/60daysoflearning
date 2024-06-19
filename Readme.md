@@ -37,9 +37,12 @@ learning backend with nodejs
 [Day 16:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day16) learned about streams in nodejs
 
 
-[Day 17-present:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day17) 
-    started project chatapp and initial setup and made user registration
-    login feature and user searching functionality
+[Day 17-present:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day17)
+
+    - started project chatapp and initial setup and made user registration
+    - login feature and user searching functionality
+    - created the schema for chats and messages
+
 
 
 
