@@ -42,6 +42,7 @@ learning backend with nodejs
     - started project chatapp and initial setup and made user registration
     - login feature and user searching functionality
     - created the schema for chats and messages
+    - create chat if not exists and function to send message
 
 
 
