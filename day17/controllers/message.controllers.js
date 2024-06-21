@@ -44,4 +44,25 @@ const sendMessage = asyncHandler(async (req, resp) => {
 
 })
 
-export { sendMessage };
+const getMessages = asyncHandler(async (req, resp) => {
+    const chatId = req.params.chatId;
+
+    try {
+        const messages = await messageModel.find({ chat: chatId }).populate([
+            {
+                path: "sender",
+                select: "username email pic"
+            },
+            {
+                path: "chat",
+            }
+        ]);
+        resp.json(new ApiResponse(200, "messages", messages));
+    } catch (err) {
+        console.log(err)
+        // resp.status(500).json(makeResponse("f", "error fetching )
+        throw new ApiError(500, "error fetching messages")
+    }
+})
+
+export { sendMessage, getMessages };
