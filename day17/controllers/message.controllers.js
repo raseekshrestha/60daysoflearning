@@ -60,7 +60,6 @@ const getMessages = asyncHandler(async (req, resp) => {
         resp.json(new ApiResponse(200, "messages", messages));
     } catch (err) {
         console.log(err)
-        // resp.status(500).json(makeResponse("f", "error fetching )
         throw new ApiError(500, "error fetching messages")
     }
 })

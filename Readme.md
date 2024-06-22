@@ -44,6 +44,7 @@ learning backend with nodejs
     - created the schema for chats and messages
     - create chat if not exists and function to send message
     - created endpoint for fetchin messages
+    - fetch all the chat associated with the user
 
 
 

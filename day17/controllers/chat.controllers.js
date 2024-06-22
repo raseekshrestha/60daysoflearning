@@ -39,5 +39,26 @@ const getChatById = asyncHandler(async (req, resp) => {
 
 })
 
+// fetch the chat where userid is associated with the current user
+const fetchChats = asyncHandler(async (req, resp) => {
+    try {
+        let chat = await chatModel.find({
+            users: { $elemMatch: { $eq: req.user._id } }
+        }).populate("users", "-password")
+            .populate("groupAdmin", "-password")
+            .populate("latestMessage")
+            .sort({ updatedAt: -1 })
 
-export { getChatById }
+        chat = await userModel.populate(chat, {
+            path: "latestMessage.sender",
+            select: "username email pic"
+        })
+        resp.json(new ApiResponse(200, "chats", chat))
+
+    } catch (err) {
+        throw new ApiError(400, err.message || "something went wrong")
+    }
+})
+
+
+export { getChatById, fetchChats }
