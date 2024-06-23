@@ -45,6 +45,7 @@ learning backend with nodejs
     - create chat if not exists and function to send message
     - created endpoint for fetchin messages
     - fetch all the chat associated with the user
+    - createing a new group and renaming function
 
 
 
