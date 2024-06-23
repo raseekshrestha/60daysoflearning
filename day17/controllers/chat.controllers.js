@@ -60,5 +60,47 @@ const fetchChats = asyncHandler(async (req, resp) => {
     }
 })
 
+const createGroupChat = asyncHandler(async (req, resp) => {
+    if (!req.body.users || !req.body.name) {
+        throw new ApiError(400, "list of users and name is required");
+    }
+    const users = req.body.users
 
-export { getChatById, fetchChats }
+    if (users.length < 2) {
+        throw new ApiError(400, 'more than 2 users are required to make a group');
+    }
+    users.push(req.user);
+    // console.log(users)
+
+    try {
+        const groupChat = await chatModel.create({
+            chatName: req.body.name,
+            users: users,
+            isGroupChat: true,
+            groupAdmin: req.user
+        })
+
+        const fullgroupChat = await chatModel.findOne({ _id: groupChat._id })
+            .populate("users", "-password")
+            .populate("groupAdmin", "-password")
+        return resp.json(new ApiResponse(200, "group creation successful", fullgroupChat))
+    } catch (err) {
+        console.log(err)
+        throw new ApiError(400, "failed to create group");
+    }
+
+})
+
+// PUT: renaming group
+const renameGroupChat = asyncHandler(async (req, resp) => {
+    const { groupId, name } = req.body
+    if (!groupId || !name) {
+        throw new ApiError(400, "groupId and name should be provided")
+    }
+    const groupChat = await ChatModel.findByIdAndUpdate({ _id: groupId }, { chatName: name }, { new: true })
+    resp.json(new ApiResponse(200, "renamed successful", groupChat))
+
+})
+
+
+export { getChatById, fetchChats, createGroupChat, renameGroupChat }
