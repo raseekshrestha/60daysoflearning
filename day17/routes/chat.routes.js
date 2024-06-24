@@ -1,6 +1,12 @@
 import { Router } from 'express';
 import verifyUser from '../middleware/verifyUser.js';
-import { getChatById, fetchChats, createGroupChat, renameGroupChat } from '../controllers/chat.controllers.js';
+import {
+    getChatById,
+    fetchChats,
+    createGroupChat,
+    renameGroupChat,
+    addOrRemoveMemberFromGroup
+} from '../controllers/chat.controllers.js';
 
 
 const router = Router();
@@ -12,5 +18,6 @@ router.get("/:userId", verifyUser, getChatById);
 router.post("/group", verifyUser, createGroupChat);
 router.put("/group/rename", verifyUser, renameGroupChat);
 
+router.put("/group/add-or-remove", verifyUser, addOrRemoveMemberFromGroup);
 
 export default router;

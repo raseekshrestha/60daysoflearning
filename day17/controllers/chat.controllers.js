@@ -97,10 +97,45 @@ const renameGroupChat = asyncHandler(async (req, resp) => {
     if (!groupId || !name) {
         throw new ApiError(400, "groupId and name should be provided")
     }
-    const groupChat = await ChatModel.findByIdAndUpdate({ _id: groupId }, { chatName: name }, { new: true })
+    const groupChat = await chatModel.findByIdAndUpdate({ _id: groupId }, { chatName: name }, { new: true })
     resp.json(new ApiResponse(200, "renamed successful", groupChat))
 
 })
 
+// PUT: adding or removing  member from grup
+const addOrRemoveMemberFromGroup = asyncHandler(async (req, resp) => {
+    // action = "add" or "remove"
+    const { groupId, userId, action } = req.body;
+    if (!groupId || !userId || !action) {
+        throw new ApiError(400, "groupId, userId and action required")
+    }
+    const groupChat = await chatModel.findOne({ _id: groupId });
+    let modified;
 
-export { getChatById, fetchChats, createGroupChat, renameGroupChat }
+    // $push and $pull for adding and removing user from the group chat
+    const updateAction = action === "add" ? "$push" : "$pull";
+    const dynamicUpdateQuery = { [updateAction]: { users: userId } }
+
+    if (action === "add") {
+        if (groupChat.users.includes(userId)) {
+            throw new ApiError(400, "User already this group")
+        }
+
+    } else {
+        // removing user part
+        if (!groupChat.users.includes(userId)) {
+            throw new ApiError(400, "User not in group!");
+        }
+    }
+    modified = await chatModel.findByIdAndUpdate({ _id: groupId }, dynamicUpdateQuery, { new: true })
+        .populate("users", "-password")
+        .populate("groupAdmin", "-password");
+    if (!modified) {
+        throw new ApiError(500, `failed to ${action} user`)
+    } else {
+        resp.json(new ApiResponse(200, `User ${action == "add" ? "added" : "removed"} successfully`, modified))
+    }
+})
+
+
+export { getChatById, fetchChats, createGroupChat, renameGroupChat, addOrRemoveMemberFromGroup }
