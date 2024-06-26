@@ -1,0 +1,9 @@
+import asyncHandler from "express-async-handler";
+// import multer from "multer";
+
+const handleFileUpload = asyncHandler(async (req, res) => {
+    const originalName = req.file.originalname;
+    res.send(originalName + req.file.filename)
+})
+
+export { handleFileUpload };

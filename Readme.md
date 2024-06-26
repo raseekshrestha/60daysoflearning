@@ -37,7 +37,7 @@ learning backend with nodejs
 [Day 16:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day16) learned about streams in nodejs
 
 
-[Day 17-present:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day17)
+[Day 17-25:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day17)
 
     - started project chatapp and initial setup and made user registration
     - login feature and user searching functionality
@@ -46,6 +46,13 @@ learning backend with nodejs
     - created endpoint for fetchin messages
     - fetch all the chat associated with the user
     - createing a new group and renaming function
+    - add or remove user from the group functionality
+    - implemented socket.io to send and receive message throught socket
+
+
+[Day 26:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day26) multer to upload files and express static
+
+
 
 
 
