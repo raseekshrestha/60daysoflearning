@@ -52,13 +52,7 @@ learning backend with nodejs
 
 [Day 26:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day26) multer to upload files and express static
 
-
-
-
-
-
-
-
+[Day 27:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day27) see result checker (webscraping with cheerio and axios)
 
 
 
