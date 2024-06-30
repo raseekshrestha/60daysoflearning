@@ -56,5 +56,8 @@ learning backend with nodejs
 
 [Day 28:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day28) efficient and scalable server with cluster module to spawn multiple process
 
+[Day 29:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day29) get full gradesheet result of see student with cheerio ,axios , table
+
+[Day 30:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day30) learned about docker
 
 
