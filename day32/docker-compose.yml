@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    container_name: backend
+    ports:
+      - 8000:8000
+    environment:
+      MONGO_URI: mongodb://mongo_db:27017
+    depends_on:
+      - mongo_db
+
+  mongo_db:
+    container_name: mongo_cont
+    image: mongo:latest
+    restart: always
+    volumes:
+      - type: volume
+        source: mongo_db
+        target: /data/db
+
+volumes:
+  mongo_db: {}
