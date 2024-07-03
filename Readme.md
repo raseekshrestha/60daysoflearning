@@ -64,4 +64,6 @@ learning backend with nodejs
 
 [Day 32:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day32) docker compose to create a seperate container for nodejs and mongodb
 
+[Day 33:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day33) HackerMan: a hackathon manager backend api
+
 
