@@ -1,0 +1,21 @@
+{
+  "name": "day34",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start":"node src/app.js",
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^5.1.1",
+    "express": "^4.19.2",
+    "mocha": "^10.6.0",
+    "mongoose": "^8.4.4",
+    "supertest": "^7.0.0"
+  }
+}

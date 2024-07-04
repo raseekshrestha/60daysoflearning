@@ -67,3 +67,4 @@ learning backend with nodejs
 [Day 33:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day33) HackerMan: a hackathon manager backend api
 
 
+[Day 34:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day34) mocha, chai and supertest for unit testing
