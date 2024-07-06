@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body bgcolor="gray" >
+
+    <form id="uploadForm">
+        <input type="file" id="file"/>
+        <button type="submit">submit</button>
+    </form>
+    <span id="message"></span>
+
+    <script>
+        const signedUrl = "https://s3.ap-south-1.amazonaws.com/s3.planet21/uploads/user-upload/download.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA4GIZITKHS6HPL5MN%2F20240706%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20240706T064633Z&X-Amz-Expires=900&X-Amz-Signature=d73633a529d146205b1a59d3da26a44d3b363d1387a9aae257eac8be273cb235&X-Amz-SignedHeaders=host&x-id=PutObject"
+        const uploadForm = document.getElementById("uploadForm")
+        uploadForm.addEventListener("submit",async (e)=>{
+            document.getElementById("message").innerHTML = "<h1>uploading...</h1>"
+
+            e.preventDefault();
+            const file = uploadForm.file.files[0]
+            const filename = file.name
+            const filetype = file.fileType
+
+            let response = await fetch("/api/upload",{
+                method:"post",
+                body: JSON.stringify({
+                    filename,filetype
+                }),
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            })
+            response = await response.json()
+            console.log(response)
+
+            fetch(response.data,{
+                method:"PUT",
+                body:file,
+                headers:{
+                    "Content-Type":filetype
+                }
+            }).then(data=>{
+                document.getElementById("message").innerHTML = "<h1>uploaded</h1>"
+                console.log(data)
+            }).catch(err=>{
+                document.getElementById("message").innerHTML = "<h1>failed</h1>"
+                console.log(err)
+            })
+        })
+
+    </script>
+    
+</body>
+</html>
