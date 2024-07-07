@@ -72,3 +72,5 @@ learning backend with nodejs
 [Day 35:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day35) created blogger backed and performed integration test with mocha, chai and supertest
 
 [Day 36:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day36) aws s3 put get delete with presigned url
+
+[Day 37:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day37) github action for ci/cd
