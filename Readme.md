@@ -74,3 +74,5 @@ learning backend with nodejs
 [Day 36:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day36) aws s3 put get delete with presigned url
 
 [Day 37:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day37) github action for ci/cd
+
+[Day 38:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day38) prometheus and grafana for code monitoring
