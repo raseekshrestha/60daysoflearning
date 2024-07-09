@@ -2,11 +2,26 @@ import express from 'express';
 import client from 'prom-client';
 import responseTime from 'response-time';
 
+// loggin
+import { createLogger, transports } from "winston";
+import LokiTransport from "winston-loki";
+const options = {
+    transports: [
+        new LokiTransport({
+            labels: {
+                appName: "express monitor"
+            },
+            host: "http://127.0.0.1:3100"
+        })
+    ]
+};
+const logger = createLogger(options);
+
 const app = express();
 
-// const collectDefaultMetrics = client.collectDefaultMetrics;
+const collectDefaultMetrics = client.collectDefaultMetrics;
 
-client.collectDefaultMetrics({
+collectDefaultMetrics({
     register: client.register
 })
 
@@ -33,6 +48,7 @@ app.use(responseTime((req, res, time) => {
 }))
 
 app.get("/", (req, res) => {
+    logger.info("GET on /")
     res.json({
         message: "success",
         data: [1, 2, 3, 4, 5]
@@ -71,8 +87,10 @@ const doTask = async (req, res) => {
 app.get("/something", async (req, res) => {
     try {
         const response = await doTask();
+        logger.info("doTask job successful")
         res.json({ status: "ok", message: `some task done in ${response} ms` })
     } catch (err) {
+        logger.error(err.message)
         res.status(500).json({
             status: "failed",
             message: err.message || "something went wrong"

@@ -14,7 +14,7 @@ scrape_configs:
 
 ```
 
-docker compose for prometheus server
+docker compose for prometheus server,grafana and loki
 
 ```
 version: '3'
@@ -22,7 +22,7 @@ version: '3'
 services:
   prom-server:
     image: prom/prometheus
-    
+    container_name: prometheus
     ports:
       - 9090:9090
     volumes:
@@ -30,10 +30,19 @@ services:
 
   grafana:
     image: grafana/grafana-oss
+    container_name: grafana
     ports:
       - 3000:3000
     depends_on:
       - prom-server
+      - loki
+
+  loki:
+    image: grafana/loki
+    container_name: loki
+    ports:
+      - 3100:3100
+
 
 ```
 

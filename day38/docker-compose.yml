@@ -16,3 +16,10 @@ services:
       - 3000:3000
     depends_on:
       - prom-server
+      - loki
+
+  loki:
+    image: grafana/loki
+    container_name: loki
+    ports:
+      - 3100:3100
