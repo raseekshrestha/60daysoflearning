@@ -76,3 +76,5 @@ learning backend with nodejs
 [Day 37:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day37) github action for ci/cd
 
 [Day 38:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day38) prometheus and grafana for code monitoring
+
+[Day 39:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day39) monitoring nodejs log with loki and grafana and custom rate limitor with redis
