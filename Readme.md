@@ -78,3 +78,5 @@ learning backend with nodejs
 [Day 38:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day38) prometheus and grafana for code monitoring
 
 [Day 39:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day39) monitoring nodejs log with loki and grafana and custom rate limitor with redis
+
+[Day 40:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day40) learned nginx, used it as a reverse proxy for nodejs applicaiton, containerized nginx, nodejs and mongodb with docker compose
