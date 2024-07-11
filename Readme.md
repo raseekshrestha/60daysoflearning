@@ -80,3 +80,5 @@ learning backend with nodejs
 [Day 39:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day39) monitoring nodejs log with loki and grafana and custom rate limitor with redis
 
 [Day 40:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day40) learned nginx, used it as a reverse proxy for nodejs applicaiton, containerized nginx, nodejs and mongodb with docker compose
+
+[Day 41:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day41) export and import mongodb database from running containers and explored more js concepts like event loop, hoisting, closure,call,bind,apply,etc 
