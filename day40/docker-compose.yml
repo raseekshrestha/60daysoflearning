@@ -6,6 +6,8 @@ services:
     build: .
     ports:
       - 8000:8000
+    volumes:
+      - ./backups:/backend/backups
     environment:
       MONGO_URI: mongodb://mongo_db:27017/
       JWT_SECRET: supersecret
@@ -30,6 +32,7 @@ services:
       - type: volume
         source: mongo_db
         target: /data/db
+      - ./backups:/backend/backups
 
 volumes:
   mongo_db: {}

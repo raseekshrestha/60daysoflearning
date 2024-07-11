@@ -60,3 +60,36 @@ http {
 }
 
 ```
+
+## backup mongodb database from the running container
+mount volumes to mongo_server
+```
+volumes:
+  - ./backups:/backend/backups
+
+```
+
+take backup on a running container with archive
+```
+sudo docker exec mongodb_server mongodump --db blogpost --archive=/backend/backups/backup.gzip --gzip
+```
+
+without archive
+```
+sudo docker exec mongodb_server mongodump --db blogpost --out /backend/backups 
+
+```
+
+
+restore the database
+
+```
+sudo docker exec mongodb_server mongorestore --archive=/backend/backups/backup.gzip --gzip
+```
+
+or
+```
+sudo docker exec mongodb_server mongorestore --nsInclude=blogpost /backend/backups/blogpost
+```
+
+
