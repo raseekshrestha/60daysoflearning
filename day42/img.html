@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form>
+        <input type="file" id="image">
+        <input type="text" placeholder="name" id="name">
+        <input type="password" placeholder="password" id="password">
+
+        <button>Add</button>
+    </form>
+
+    <select>
+        <option selected disabled>Select Image</option>
+
+    </select>
+    <hr>
+
+    <img alt="preview iamge" id="im">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aes-js/3.1.2/index.min.js"
+        integrity="sha512-LOqfKFwH2W3jeb0NzXcImFlSyoL7hjsWbZvIeKNOaZw1gFw+yKTE/QUDGLit2KWdd57qd6IgMDkppK2tkwIEhA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        // var key = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 5];
+
+        const fetchImagesNames = async () => {
+            let data = await fetch("/getnames");
+            data = await data.json();
+            data.forEach(name => {
+                document.querySelector("select").insertAdjacentHTML('beforeend',
+                    `<option value=${name._id}>${name.name}</option>`)
+            });
+        }
+        const fetchImageFromId = async (_id, password) => {
+            let data = await fetch(`/getimage?_id=${_id}`)
+            data = await data.json();
+            console.log(data)
+            const key = createKeyFromPassword(password)
+            const decrypted = decrypt(data.encryptedHex, key)
+            console.log(decrypted)
+            document.getElementById("im").src = decrypted
+        }
+
+        const createKeyFromPassword = (password) => {
+            const key = [];
+            let passSum = Array.from(password).reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            for (let i = 0; i < 16; i++) {
+                // key[i] = 
+                key[i] = passSum % 10;
+                passSum = (passSum % 2 == 0) ? passSum / 2 : passSum * 3 + 1;
+            }
+
+            return key;
+        }
+
+        // console.log(createKeyFromPassword("shrestha"))
+
+        fetchImagesNames()
+
+
+        const file = document.getElementById("image");
+        const name = document.getElementById("name");
+        const select = document.querySelector("select");
+        const password = document.getElementById("password")
+
+        select.addEventListener('change', (e) => {
+            const password = prompt("password:")
+            fetchImageFromId(e.target.value, password)
+        })
+
+
+        const getImageEncodedHex = async (file, key) => {
+            const reader = new FileReader();
+
+            return new Promise((resolve, reject) => {
+                reader.onload = (event) => {
+                    try {
+                        const encryptedHex = encrypt(event.target.result, key);
+                        console.log("encrypted hexa: ", encryptedHex)
+                        resolve(encryptedHex)
+
+                    } catch (err) {
+                        console.log('err occured')
+                        reject(err)
+                    }
+                    // const decryptedText = decrypt(encryptedHex,key);
+                };
+                reader.readAsDataURL(file);
+
+            })
+
+
+        }
+
+        const encrypt = (data, key) => {
+            var textBytes = aesjs.utils.utf8.toBytes(data, key);
+
+            var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+            var encryptedBytes = aesCtr.encrypt(textBytes);
+
+            var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+
+            return encryptedHex
+
+        }
+
+        const decrypt = (encryptedHex, key) => {
+            var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+
+            const encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
+
+            var decryptedBytes = aesCtr.decrypt(encryptedBytes);
+            var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+            return decryptedText
+        }
+        const btn = document.querySelector("button")
+        btn.addEventListener("click", (e) => submit(e))
+
+        const submit = async (e) => {
+            e.preventDefault();
+
+            // Input validation
+            if (!file.files[0]) {
+                return alert("image not selected");
+            }
+            if (!password.value) {
+                return alert("password required!");
+            }
+            if (!name.value) {
+                alert("name not selected");
+                return;
+            }
+
+            const key = createKeyFromPassword(password.value);
+            console.log("password is :", password.value);
+            console.log("key is :", key);
+
+            try {
+                // Asynchronous file reading and encryption
+                const encryptedHex = await getImageEncodedHex(file.files[0], key);
+
+                const encryptedImageFromEncHex = btoa(encryptedHex)
+
+
+                console.log('now it is cal:', encryptedHex);
+
+                // Build payload with proper error handling
+                const payload = {
+                    encryptedHex: encryptedHex || "", // Set default if undefined
+                    name: name.value
+                };
+                console.log(payload);
+
+                // Send fetch request
+                const response = await fetch("/add", {
+                    method: "POST",
+                    body: JSON.stringify(payload),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                // Handle response and potential errors
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                alert(data.message);
+            } catch (err) {
+                console.error("Error in submit:", err);
+                alert("Error uploading image!");
+            }
+        };
+
+
+        // file.addEventListener("change", (e) => {
+        //   const reader = new FileReader();
+        //   reader.onload = (event) => {
+        //     encryptedHex = encrypt(event.target.result,key);
+        //     // const decryptedText = decrypt(encryptedHex,key);
+        //   };
+        //   reader.readAsDataURL(e.target.files[0]);
+        // });
+    </script>
+
+</body>
+
+</html>
