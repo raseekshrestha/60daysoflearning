@@ -84,3 +84,5 @@ learning backend with nodejs
 [Day 41:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day41) export and import mongodb database from running containers and explored more js concepts like event loop, hoisting, closure,call,bind,apply,etc 
 
 [Day 42:](https://github.com/raseekshrestha/60daysoflearning/tree/master/day42) created image encryption site that encrypt image with AES 
+
+[Day 43-60:](https://github.com/raseekshrestha/ecommerce) project ecommerce
